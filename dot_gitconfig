@@ -1,0 +1,10 @@
+[user]
+	email = aelnaggar@tohigherground.com
+	name = Amin El-Naggar
+	signingKey = ""
+[gpg]
+	program = gpg
+[commit]
+	gpgSign = false
+[tag]
+	forceSignAnnotated = false
