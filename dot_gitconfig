@@ -1,10 +1,69 @@
-[user]
-	email = aelnaggar@tohigherground.com
-	name = Amin El-Naggar
-	signingKey = ""
+[alias]
+	aa = add -A
+	b = branch
+	c = commit -am
+	cm = commit -am
+	acm = !git add -A && git commit -am
+	up = pull
+	p = push
+	pl = pull
+	f = flow
+	ff = flow feature
+	st = status
+	s = status -s
+	cl = clone
+	sclone = clone --depth=1
+	df = diff --color --color-words --abbrev
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	co = checkout
+
+
+	# Show the diff between the latest commit and the current state
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+	# Merge GitHub pull request on top of the `main` branch
+	mpr = "!f() { \
+		if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
+			git fetch origin refs/pull/$1/head:pr/$1 && \
+			git rebase main pr/$1 && \
+			git checkout main && \
+			git merge pr/$1 && \
+			git branch -D pr/$1 && \
+			git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
+		fi \
+	}; f"
+
+
+[color]
+	ui = always
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	commit = green bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[core]
+	excludesfile = ~/.gitignore
+	attributesfile = ~/.gitattributes
+	# insanely beautiful diffs
+	pager = diff-highlight | diff-so-fancy | less -r
 [gpg]
 	program = gpg
 [commit]
 	gpgSign = false
 [tag]
 	forceSignAnnotated = false
+[user]
+	name = Amin El-Naggar
+	email = amin@elnaggar.ca
+[includeIf "gitdir:~/development/hge/"]
+	path = ~/development/hge/.gitconfig

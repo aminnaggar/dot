@@ -1,0 +1,27 @@
+{{- $paths := list }}
+{{- $homeDir := .chezmoi.homeDir }}
+{{- range $_, $relPath := list
+      "bin"
+      ".local/bin"
+      /* Go */
+      "go/bin"
+      /* Rust */
+      ".cargo/bin"
+      /* Node */
+      ".fnm"
+      ".yarn/bin"
+      ".config/yarn/global/node_modules/.bin"
+      /* Ruby */
+      ".rvm/bin"
+      /* Python */
+      ".poetry/bin"
+
+      -}}
+{{    $path := joinPath $homeDir $relPath }}
+{{-   if stat $path }}
+{{-     $paths = mustAppend $paths $path }}
+{{-   end }}
+{{- end }}
+{{- if $paths }}
+export PATH={{ toStrings $paths | join ":" }}:$PATH
+{{- end }}
