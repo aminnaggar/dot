@@ -1,9 +1,8 @@
+{{  if eq .ostype "debian" -}}
 # Debian systems
 # ============================================================
-{{  if eq .ostype "debian" -}}
 {{    $packages := list
         "curl"
-        /*"direnv"*/
         "jq"
         "make"
         "neovim"
@@ -24,9 +23,9 @@ set -eufo pipefail
 {{$sudo}}apt-get install -y {{ $packages | join " " }}
 
 
+{{ else if eq .ostype "darwin" -}}
 # OSX - Darwin
 # ============================================================
-{{ else if eq .ostype "darwin" -}}
 #!/bin/sh
 # zsh comes default with osx
 brew install ripgrep
@@ -34,8 +33,9 @@ brew install neovim
 {{ end -}}
 
 
-
 {{ if or (eq .ostype "debian") (eq .ostype "darwin") -}}
+# Install Debian/Darwin Apps
+# ============================================================
 # Install Rust using rustup
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
