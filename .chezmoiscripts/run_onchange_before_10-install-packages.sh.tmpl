@@ -1,10 +1,9 @@
+#!/bin/bash
 {{$sudo := "sudo " -}}
 {{if eq .chezmoi.username "root" -}}
 {{  $sudo = "" -}}
 {{end -}}
 {{  if eq .ostype "debian" -}}
-#!/bin/bash
-
 # Debian systems
 # ============================================================
 {{    $packages := list
@@ -28,7 +27,6 @@ set -eufo pipefail
 {{ else if eq .ostype "darwin" -}}
 # OSX - Darwin
 # ============================================================
-#!/bin/sh
 # zsh comes default with osx
 brew install ripgrep
 brew install neovim
@@ -59,7 +57,4 @@ export PATH=$HOME/.local/share/fnm:$PATH
 eval "`fnm env`"
 fnm install --lts
 fnm use lts/latest
-
-# Install LunarVim
-LV_BRANCH='release-1.2/neovim-0.8' bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/fc6873809934917b470bff1b072171879899a36b/utils/installer/install.sh)
 {{ end -}}
