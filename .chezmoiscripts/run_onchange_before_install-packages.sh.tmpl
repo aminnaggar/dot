@@ -16,6 +16,7 @@
         "units"
         "python3"
         "python3-pip"
+        "unzip"
         "zsh" -}}
 
 
@@ -54,6 +55,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # Install Node using fnm
 curl -fsSL https://fnm.vercel.app/install | bash
+export PATH=$HOME/.local/share/fnm:$PATH
+eval "`fnm env`"
 fnm install --lts
 fnm use lts/latest
 
