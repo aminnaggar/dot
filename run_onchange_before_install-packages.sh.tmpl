@@ -1,4 +1,6 @@
 {{  if eq .ostype "debian" -}}
+#!/bin/bash
+
 # Debian systems
 # ============================================================
 {{    $packages := list
@@ -12,7 +14,7 @@
         "python3-pip"
         "zsh" -}}
 
-#!/bin/sh
+
 set -eufo pipefail
 
 {{$sudo := "sudo " -}}
@@ -21,7 +23,6 @@ set -eufo pipefail
 {{end -}}
 {{$sudo}}apt-get update
 {{$sudo}}apt-get install -y {{ $packages | join " " }}
-
 
 {{ else if eq .ostype "darwin" -}}
 # OSX - Darwin
