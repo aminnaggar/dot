@@ -10,7 +10,7 @@
 {{/* nvm_version=stable */}}
 nvm_version="v0.8.3"
 
-tmp_folder="/tmp/nvm"
+tmp_folder="/tmp/nvim"
 tmp_tar="$tmp_folder/nvim.tar.gz"
 tmp_contents="$tmp_folder/nvim-linux64"
 local_folder="$HOME/.local"
@@ -20,7 +20,7 @@ set -eufo pipefail
 # Install NeoVim
 # ============================================================
 # clear tmp folders
-rm -rf /tmp/nvm         # intentionally hard written to avoid disasters
+rm -rf /tmp/nvim         # intentionally hard written to avoid disasters
 # create tmp folders
 mkdir -p $tmp_folder
 # download nvim
@@ -29,7 +29,7 @@ curl -L -o $tmp_tar "https://github.com/neovim/neovim/releases/download/$nvm_ver
 tar xzvf $tmp_tar --directory $tmp_folder
 # move to local
 mkdir -p $local_folder
-cp -rf $tmp_contents/* $local_folder/
+cp -rf "$tmp_contents/"* "$local_folder/"
 
 
 {{/*
