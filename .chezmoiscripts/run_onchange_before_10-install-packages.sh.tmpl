@@ -69,7 +69,7 @@ fnm use lts/latest
 # -------------------------------
 lazygit_version=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
 lazygit_folder=$(downloadExtract lazygit "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${lazygit_version}_Linux_x86_64.tar.gz")
-{{$sudo}}install $lazygit_folder/lazygit $HOME/.local/bin
+{{$sudo}}install $lazygit_folder/lazygit $HOME/.local/bin/lazygit
 
 
 # Install git tools
