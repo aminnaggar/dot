@@ -1,0 +1,20 @@
+# Downloads a tar.gz file and extracts it
+# all in the tmp folder to be deleted later
+# returns the extracted folder path
+# $1 - name used to create folder in tmp
+# $2 - url of tar.gz
+# -------------------------------
+function downloadExtract(){
+  tmpfolder=/tmp/$1
+  tmptar=$tmpfolder/archive.tar.gz
+  tmpextracted=$tmpfolder/extracted
+
+  mkdir -p $tmpfolder
+  mkdir -p $tmpextracted
+
+  curl -Lo $tmptar $2
+
+  tar xzf $tmptar --directory $tmpextracted
+
+  echo $tmpextracted
+}

@@ -2,6 +2,7 @@
 # ============================================================
 source $HOME/.aliases
 source $HOME/.zshenv
+source $HOME/.functions
 
 # GUI
 # ============================================================
@@ -43,6 +44,7 @@ export GOPATH=$HOME/go
 # -------------------------------
 # fnm
 export PATH=$HOME/.fnm:$PATH
+export PATH=$HOME/.local/share/fnm:$PATH
 eval "$(fnm env --use-on-cd)"
 # Yarn
 export PATH=$HOME/.yarn/bin:$PATH
@@ -177,34 +179,10 @@ source $ZSH/oh-my-zsh.sh
 # Functions
 # ============================================================
 
-# Gitignore generator from TopTal
-# -------------------------------
-function gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}
-
 # Z folder jumper
 # -------------------------------
-source $HOME/bin/z.sh
+include $HOME/bin/z.sh
 
-# Create a new directory and enter it
-# -------------------------------
-function mkd() {
-	mkdir -p "$@" && cd "$@"
-}
-
-# # Codi
-# # -------------------------------
-# # Usage: codi [filetype] [filename]
-# codi() {
-#   local syntax="${1:-javascript}"
-#   shift
-#   lvim -c \
-#     "let g:dashboard_disable_at_vimenter = 1 |\
-#     set bt=nofile ls=0 noru nonu nornu |\
-#     hi ColorColumn ctermbg=NONE |\
-#     hi VertSplit ctermbg=NONE |\
-#     hi NonText ctermfg=0 |\
-#     Codi $syntax" "$@"
-# }
 
 # Cloud Services
 # ============================================================

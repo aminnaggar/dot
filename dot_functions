@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Downloads a tar.gz file and extracts it
+# all in the tmp folder to be deleted later
+# returns the extracted folder path
+# $1 - name used to create folder in tmp
+# $2 - url of tar.gz
+# -------------------------------
+function downloadExtract(){
+  tmpfolder=/tmp/$1
+  tmptar=$tmpfolder/archive.tar.gz
+  tmpextracted=$tmpfolder/extracted
+
+  mkdir -p $tmpfolder
+  mkdir -p $tmpextracted
+
+  curl -Lo $tmptar $2
+
+  tar xzf $tmptar --directory $tmpextracted
+
+  echo $tmpextracted
+}
+
+# Gitignore generator from TopTal
+# -------------------------------
+function gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}
+
+# Create a new directory and enter it
+# -------------------------------
+function mkd() {
+	mkdir -p "$@" && cd "$@"
+}
+
+
+# Source file if it exists
+# -------------------------------
+function include () {
+    [[ -f "$1" ]] && source "$1"
+}
+
+# # Codi
+# # -------------------------------
+# # Usage: codi [filetype] [filename]
+# codi() {
+#   local syntax="${1:-javascript}"
+#   shift
+#   lvim -c \
+#     "let g:dashboard_disable_at_vimenter = 1 |\
+#     set bt=nofile ls=0 noru nonu nornu |\
+#     hi ColorColumn ctermbg=NONE |\
+#     hi VertSplit ctermbg=NONE |\
+#     hi NonText ctermfg=0 |\
+#     Codi $syntax" "$@"
+# }
