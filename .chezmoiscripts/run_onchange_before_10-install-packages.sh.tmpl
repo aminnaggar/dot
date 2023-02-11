@@ -7,6 +7,11 @@
 # using downloadExtract from .functions
 {{include ".helpers/.functions" }}
 
+local_folder="$HOME/.local"
+mkdir -p $local_folder/bin
+mkdir -p $local_folder/share/man/man1/
+
+
 {{  if eq .ostype "debian" -}}
 # Debian systems
 # ============================================================
@@ -66,12 +71,17 @@ fnm use lts/latest
 # Install Applications
 # ============================================================
 
+# Install Z by rupa
+# -------------------------------
+z_folder=$(downloadExtract zfunc "https://github.com/rupa/z/archive/master.tar.gz")
+cp -f $z_folder/z.sh $local_folder/bin/
+cp -f $z_folder/z.1 $local_folder/share/man/man1/
+
 # Install Lazygit
 # -------------------------------
 lazygit_version=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
 lazygit_folder=$(downloadExtract lazygit "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${lazygit_version}_Linux_x86_64.tar.gz")
-{{$sudo}}install $lazygit_folder/lazygit $HOME/.local/bin/lazygit
-
+{{$sudo}}install $lazygit_folder/lazygit $local_folder/bin/lazygit
 
 # Install git tools
 # -------------------------------

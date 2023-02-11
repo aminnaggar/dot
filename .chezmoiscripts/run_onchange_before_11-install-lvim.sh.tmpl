@@ -16,9 +16,14 @@ set -euo pipefail
 nvim_extracted=$(downloadExtract nvim_chezmoi "https://github.com/neovim/neovim/releases/download/$nvm_version/nvim-linux64.tar.gz")
 # move to local
 cp -rf "$nvim_extracted/nvim-linux64/"* "$local_folder/"
-export PATH=$HOME/.local/bin:$PATH      # make sure our nvim is the one that runs in this script
 
 # Install LunarVim
 # ============================================================
-export PATH=$HOME/.cargo/bin:$PATH
+
+# Setup dependency paths
+# -------------------------------
+export PATH=$HOME/.local/bin:$PATH  # make sure our nvim is the one that runs in this script
+export PATH=$HOME/.cargo/bin:$PATH  # cargo
+eval "`fnm env`"                    # node
+
 LV_BRANCH='release-1.2/neovim-0.8' bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/fc6873809934917b470bff1b072171879899a36b/utils/installer/install.sh)
